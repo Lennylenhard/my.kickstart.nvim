@@ -21,5 +21,11 @@ return {
         },
       },
     },
+    event_handler = {
+      event = 'vim_enter',
+      handler = function()
+        vim.cmd 'Neotree'
+      end,
+    },
   },
 }
