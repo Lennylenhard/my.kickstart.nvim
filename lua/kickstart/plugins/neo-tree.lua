@@ -1,5 +1,4 @@
--- Neo-tree is a Neovim plugin to browse the file system
--- https://github.com/nvim-neo-tree/neo-tree.nvim
+-- lua/kickstart/plugins/neo-tree.lua
 
 return {
   'nvim-neo-tree/neo-tree.nvim',
@@ -11,21 +10,25 @@ return {
   },
   lazy = false,
   keys = {
-    { '\\', ':Neotree reveal<CR>', desc = 'NeoTree reveal', silent = true },
+    -- This single keybinding will now toggle neo-tree
+    {
+      '<leader>e',
+      function()
+        -- The command to toggle neo-tree.
+        -- It will open it if it's closed, and close it if it's open.
+        require('neo-tree.command').execute { toggle = true }
+      end,
+      desc = 'Toggle file [E]xplorer',
+    },
   },
+  -- We no longer need the mapping inside opts, so it has been removed.
   opts = {
     filesystem = {
       window = {
         mappings = {
-          ['\\'] = 'close_window',
+          -- Previous mapping removed from here
         },
       },
-    },
-    event_handler = {
-      event = 'vim_enter',
-      handler = function()
-        vim.cmd 'Neotree'
-      end,
     },
   },
 }
